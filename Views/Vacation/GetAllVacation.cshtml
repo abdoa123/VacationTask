@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EmpolyeeVacation>
+
+<br />
+
+@if (Model.ToList().Count == 0)
+{
+    <h1> Employee not take any vacation yet  </h1>
+    <a asp-action="index" asp-controller="home">
+        Click here to navigate to the home page
+    </a>
+}
+else
+{ <br />
+
+    <div class="top-buffer"></div>
+    <div class="panel panel-primary">
+        <div class="panel-heading panel-head">@Model.ToList()[0].Employee.Name</div>
+        <div class="panel-body">
+
+            <br /> <br />
+            <div class="top-buffer"></div>
+            <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th>VacationFrom</th>
+                        <th>VacationTo</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.VacationFrom)</td>
+                            <td>@Html.DisplayFor(modelItem => item.VacationTo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Reason)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <div class="card-footer text-center">
+                <a asp-controller="Vacation" asp-action="AddVacation" asp-route-id="@Model.ToList()[0].EmployeeId" class="btn btn-warning">Add New Vacation </a>
+                <a asp-controller="home" asp-route-id="@Model.ToList()[0].EmployeeId" asp-action="" class="btn btn-success">Back</a>
+            </div>
+        </div>
+    </div>
+}
+
+
+
